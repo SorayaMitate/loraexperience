@@ -20,18 +20,22 @@ def rungps(): # GPSモジュールを読み、GPSオブジェクトを更新す�
     s_GPS.readline()  # 最初の1行は中途半端なデータが読めることがあるので、捨てる
 
     while True:
-        sentence = None
-        sentence = s_GPS.readline().decode('utf-8')  # GPSデーターを読み、文字列に変換する
-        if sentence is None:
-            print('None')
-        else:
-            if sentence[0] != '$': # 先頭が'$'でなければ捨てる
-                continue
-            for x in sentence: # 読んだ文字列を解析してGPSオブジェクトにデーターを追加、更新する
-                gps.update(x)
-        s_GPS.reset_input_buffer()
+        try:
+            sentence = s_GPS.readline().decode('utf-8')  # GPSデーターを読み、文字列に変換する
+        except UnicodeDecodeError:
+            # でコードできないときはその行をスキップする
+            line = f.readline()
+            continue
+
+        if sentence[0] != '$': # 先頭が'$'でなければその行をスキップする
+            continue
+
+        for x in sentence: # 読んだ文字列を解析してGPSオブジェクトにデーターを追加、更新する
+            gps.update(x)
 
         time.sleep(0.01)
+
+
 
 gpsthread = threading.Thread(target=rungps, args=()) # 上の関数を実行するスレッドを生成
 gpsthread.daemon = True
@@ -66,10 +70,13 @@ try:
             print(jikan, index, lat, lon)
             i=i+1
 
+        time.sleep(5.0)
+
 except KeyboardInterrupt:
     print('finish')
 
 
+# 奇数ならば"0"を追記する
 def kisuu_str(str):
     if len(str) % 2 == 1 :
         return "0" + str
