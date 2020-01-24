@@ -61,8 +61,8 @@ def trans(ip):
         while True:
             if gps.clean_sentences > 20: # ちゃんとしたデーターがある程度たまったら出力する
                 h = gps.timestamp[0] if gps.timestamp[0] < 24 else gps.timestamp[0] - 24
-                lat = '{:.8f}'.format(gps.latitude[0])
-                lon = '{:.8f}'.format(gps.longitude[0])
+                lat = '{:.16f}'.format(gps.latitude[0])
+                lon = '{:.16f}'.format(gps.longitude[0])
                 lon = '0' + lon
 
                 if len(str(i)) <= 4:
