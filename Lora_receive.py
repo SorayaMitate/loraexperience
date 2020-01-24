@@ -21,8 +21,7 @@ def rec(arg):
             #print(rxda_split)
             #print(rxda_split[0])
 
-            print(rxda_split[0])
-            file_name = rxda_split[0] + '_data.csv'
+            file_name = arg + '_data.csv'
             with open(file_name, 'a') as f:
                 f.write(rxda + ',' + '\n')
                 f.close()
