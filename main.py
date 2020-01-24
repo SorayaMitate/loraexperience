@@ -8,13 +8,15 @@ network_list = ['191','192']
 def main():
 
     #送信プロセス
-    process_trans = mp.Process(target=trans, args=ip)
+    process_trans = mp.Process(target=trans, args=(ip,))
     process_trans.start()
     
     #受信プロセス
-    process_rec = mp.Process(target=rec, args=ip)
+    process_rec = mp.Process(target=rec, args=(ip,))
     process_rec.start()
 
+    process_rec.join()
+    process_trans.join()
 
 if __name__ == "__main__":
     main()
