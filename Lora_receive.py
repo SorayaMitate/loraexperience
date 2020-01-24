@@ -18,10 +18,13 @@ def rec(arg):
             rxda = rxda.replace(':', ',')
             rxda_split = rxda.split(",")
 
-            file_name = rxda_split[1] + '_data.csv'
-            with open(file_name, 'a') as f:
-                f.write(rxda + ',' + '\n')
-                f.close()
+            if len(rxda_split) >= 1:
+                file_name = rxda_split[1] + '_data.csv'
+                with open(file_name, 'a') as f:
+                    f.write(rxda + ',' + '\n')
+                    f.close()
+            else :
+                continue
 
     except KeyboardInterrupt:
         s_lora.close()
