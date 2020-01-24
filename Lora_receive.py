@@ -18,7 +18,7 @@ def rec(arg):
             rxda = rxda.replace(':', ',')
             rxda_split = rxda.split(",")
 
-            if len(rxda_split) >= 1:
+            if len(rxda_split) >= 3:
                 file_name = rxda_split[1] + '_data.csv'
                 with open(file_name, 'a') as f:
                     f.write(rxda + ',' + '\n')
