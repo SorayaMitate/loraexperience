@@ -21,13 +21,13 @@ def kisuu_str(str):
         return str
     return -1
 
-def trans():
+def trans(ip):
 
     gps = micropyGPS.MicropyGPS(9, 'dd') # MicroGPSオブジェクトを生成する。
                                         # 引数はタイムゾーンの時差と出力フォーマット
 
     def rungps(): # GPSモジュールを読み、GPSオブジェクトを更新する
-        s_GPS = serial.Serial('/dev/ttyUSB1', 9600, timeout=10)
+        s_GPS = serial.Serial('/dev/ttyUSB0', 9600, timeout=10)
         s_GPS.readline()  # 最初の1行は中途半端なデータが読めることがあるので、捨てる
         sentence = []
         while True:
@@ -55,7 +55,7 @@ def trans():
     LoRaを用いた通信
     緯度, 軽度, 海抜情報をシリアルに流す
     '''
-    s_lora = serial.Serial('/dev/ttyUSB0', 19200)
+    s_lora = serial.Serial('/dev/ttyUSB1', 19200)
     i=0
     try:
         while True:
