@@ -18,9 +18,7 @@ def rec(arg):
             rxda = rxda.replace(':', ',')
             rxda_split = rxda.split(",")
 
-            print(rxda_split)
-
-            file_name = rxda[1] + '_data.csv'
+            file_name = rxda_split[1] + '_data.csv'
             with open(file_name, 'a') as f:
                 f.write(rxda + ',' + '\n')
                 f.close()
