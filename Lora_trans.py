@@ -13,14 +13,6 @@ micropyGPSを用いたGPS信号受信プロセス
 デーモンスレッドにより, GPSデータを中断することなく別スレッドで持続して取得
 '''
 
-# 奇数ならば"0"を追記する
-def kisuu_str(str):
-    if len(str) % 2 == 1 :
-        return "0" + str
-    else:
-        return str
-    return -1
-
 def trans(ip):
 
     gps = micropyGPS.MicropyGPS(9, 'dd') # MicroGPSオブジェクトを生成する。
@@ -55,6 +47,14 @@ def trans(ip):
     LoRaを用いた通信
     緯度, 軽度, 海抜情報をシリアルに流す
     '''
+    # 奇数ならば"0"を追記する
+    def kisuu_str(str):
+        if len(str) % 2 == 1 :
+            return "0" + str
+        else:
+            return str
+        return -1
+
     s_lora = serial.Serial('/dev/ttyUSB1', 19200)
     i=0
     try:
@@ -65,20 +65,13 @@ def trans(ip):
                 lon = '{:.16f}'.format(gps.longitude[0])
                 lon = '0' + lon
 
-                if len(str(i)) <= 4:
-                    index = '0'*( 4 - len(str(i))) + str(i)
-                elif i >= 10000:
-                    i = 0
-                else :
-                    index = str(i)
                 h = kisuu_str(str(h))
                 minutes = kisuu_str(str(gps.timestamp[1]))
                 second = kisuu_str(str(int(gps.timestamp[2])))
 
                 jikan = h + minutes + second
                 s_lora.write(b'TXDA'+ jikan.encode('utf-8') + \
-                    index.encode('utf-8') + lat.encode('utf-8') + lon.encode('utf-8')  + b'\r\n')
-                i=i+1
+                    lat.encode('utf-8') + lon.encode('utf-8')  + b'\r\n')
 
     except KeyboardInterrupt:
         print('finish')
