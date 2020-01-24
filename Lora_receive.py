@@ -8,7 +8,7 @@ import sys
 #    r'C:\Users\soraya-PC\OneDrive - awcc.uec.ac.jp\uec_doc\Mieuniv_Scope\experiment\lib')
 
 def rec(arg):
-    s_lora = serial.Serial('COM12', 19200)
+    s_lora = serial.Serial(arg, 19200)
 
     try:
         while True:

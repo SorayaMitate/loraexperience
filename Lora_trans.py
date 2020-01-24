@@ -13,13 +13,13 @@ micropyGPSを用いたGPS信号受信プロセス
 デーモンスレッドにより, GPSデータを中断することなく別スレッドで持続して取得
 '''
 
-def trans(ip):
+def trans(*args):
 
     gps = micropyGPS.MicropyGPS(9, 'dd') # MicroGPSオブジェクトを生成する。
                                         # 引数はタイムゾーンの時差と出力フォーマット
 
     def rungps(): # GPSモジュールを読み、GPSオブジェクトを更新する
-        s_GPS = serial.Serial('/dev/ttyUSB0', 9600, timeout=10)
+        s_GPS = serial.Serial(args[0], 9600, timeout=10)
         s_GPS.readline()  # 最初の1行は中途半端なデータが読めることがあるので、捨てる
         sentence = []
         while True:
@@ -55,7 +55,7 @@ def trans(ip):
             return str
         return -1
 
-    s_lora = serial.Serial('/dev/ttyUSB1', 19200)
+    s_lora = serial.Serial(args[1], 19200)
     i=0
     try:
         while True:
