@@ -13,13 +13,13 @@ def rec(arg):
     try:
         while True:
             cngtext = ""
-            print('waiting')
+            #print('waiting')
             rxda = s_lora.readline().decode('utf-8')
             rxda = rxda.replace('\r\n', '')
             rxda = rxda.replace(':', ',')
             rxda_split = rxda.split(",")
-            print(rxda_split)
-            print(rxda_split[0])
+            #print(rxda_split)
+            #print(rxda_split[0])
 
             file_name = rxda_split[0] + '_data.csv'
             with open(file_name, 'a') as f:
