@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import multiprocessing as mp
 from Lora_trans import trans
 from Lora_receive import rec
