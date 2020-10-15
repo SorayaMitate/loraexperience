@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-ss
 
 import multiprocessing as mp
 from Lora_trans import trans
