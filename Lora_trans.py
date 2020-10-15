@@ -31,11 +31,14 @@ def trans(*args):
                 s_GPS.readline()
                 continue
 
-            if sentence[0] != '$': # 先頭が'$'でなければその行をスキップする
-                continue
+            if len(sentence) > 0:
+                if sentence[0] != '$': # 先頭が'$'でなければその行をスキップする
+                    continue
 
-            for x in sentence: # 読んだ文字列を解析してGPSオブジェクトにデーターを追加、更新する
-                gps.update(x)
+                for x in sentence: # 読んだ文字列を解析してGPSオブジェクトにデーターを追加、更新する
+                    gps.update(x)
+            else:
+                pass
 
             s_GPS.flushInput()
 
