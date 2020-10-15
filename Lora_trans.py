@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-ss
 #自作モジュールのパスをsys.pathへ追加
 #import sys
 #sys.path.append(r'C:\Users\soraya-PC\OneDrive - awcc.uec.ac.jp\uec_doc\Mieuniv_Scope\experiment\lib')

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-ss
 """
 # MicropyGPS - a GPS NMEA sentence parser for Micropython/Python 3.X
 # Copyright (c) 2017 Michael Calvin McCoy (calvin.mccoy@protonmail.com)

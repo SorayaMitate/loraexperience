@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-ss
 import datetime
 import binascii
 import time
