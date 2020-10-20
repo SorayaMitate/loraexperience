@@ -1,25 +1,28 @@
 # -*- coding: utf-8 -*-ss
+from multiprocessing import Manager, Value, Process
+import threading
+import micropyGPS
 
-import multiprocessing as mp
-from Lora_trans import trans
-from Lora_receive import rec
+from loracomm import trans, rec
+from func import rungps
 
 ttyUSB0 = '/dev/ttyUSB0'
 ttyUSB1 = '/dev/ttyUSB1'
 ttyUSB2 = '/dev/ttyUSB2'
 
-def main():
-
-    #送信プロセス
-    process_trans = mp.Process(target=trans, args=(ttyUSB0, ttyUSB1,))
-    process_trans.start()
-    
-    #受信プロセス
-    process_rec = mp.Process(target=rec, args=(ttyUSB2,))
-    process_rec.start()
-
-    process_rec.join()
-    process_trans.join()
-
 if __name__ == "__main__":
-    main()
+
+    gps = micropyGPS.MicropyGPS(9, 'dd') # MicroGPSオブジェクトを生成する。
+                                        # 引数はタイムゾーンの時差と出力フォーマット
+
+    # ①ロックを作成
+    lock = threading.Lock()
+    gpsthread = threading.Thread(target=rungps, args=(gps, lock, ttyUSB0)) # 上の関数を実行するスレッドを生成
+    gpsthread.daemon = True
+    gpsthread.start() # スレッドを起動
+
+    tx_thread = threading.Thread(target=trans, args=(gps, ttyUSB1))
+    tx_thread.start()
+
+    rx_thread = threading.Thread(target=trans, args=(gps, ttyUSB2))
+    rx_thread.start()
