@@ -61,6 +61,7 @@ def trans(s_lora, gps):
 
     try:
         while True:
+            print('lat =',float('{:.16f}'.format(gps.latitude[0])))
             if float('{:.16f}'.format(gps.latitude[0]))>0: # ちゃんとしたデーターがある程度たまったら出力する
                 h = gps.timestamp[0] if gps.timestamp[0] < 24 else gps.timestamp[0] - 24
                 lat = '{:.16f}'.format(gps.latitude[0])
