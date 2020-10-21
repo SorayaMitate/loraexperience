@@ -35,7 +35,7 @@ def rungps(gps, lock, arg): # GPSモジュールを読み、GPSオブジェク�
                 gps.update(x)
             lock.release()
 
-            time.sleep(1.0)
+            time.sleep(0.1)
 
         else:
             pass
