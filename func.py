@@ -33,7 +33,7 @@ def rungps(s_GPS, s_tx, gps, lock): # GPSモジュールを読み、GPSオブジ
                 print('lat =','{:.16f}'.format(gps.latitude[0]))
                 s_tx.flush()
 
-                time.sleep(1.0)
+                time.sleep(0.1)
 
         
         except UnicodeDecodeError:
