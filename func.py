@@ -25,18 +25,17 @@ def rungps(s_GPS, s_tx, gps, lock): # GPSモジュールを読み、GPSオブジ
             s_GPS.readline()
             continue
 
-        if len(sentence) > 10: # ちゃんとしたデーターがある程度たまったら出力する
-            lock.acquire()
-            if sentence[0] != '$': # 先頭が'$'でなければその行をスキップする
-                continue
-            for x in sentence: # 読んだ文字列を解析してGPSオブジェクトにデーターを追加、更新する
-                gps.update(x)
+        lock.acquire()
+        if sentence[0] != '$': # 先頭が'$'でなければその行をスキップする
+            continue
+        for x in sentence: # 読んだ文字列を解析してGPSオブジェクトにデーターを追加、更新する
+            gps.update(x)
 
-            lock.release()
-            print('lat =','{:.16f}'.format(gps.latitude[0]))
-            s_tx.flush()
+        lock.release()
+        print('lat =','{:.16f}'.format(gps.latitude[0]))
+        s_tx.flush()
 
-            time.sleep(1.0)
+        time.sleep(1.0)
 
         else:
             pass
