@@ -11,7 +11,7 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG, format='%(threadName)s: %(message)s')
 
-def rec(gps, arg):
+def rec(s_lora, gps):
 
     logging.debug('rec start')
 
@@ -44,7 +44,7 @@ def rec(gps, arg):
 
     logging.debug('end')
 
-def trans(gps, arg):
+def trans(s_lora, gps):
 
     logging.debug('trans start')
 
@@ -60,7 +60,6 @@ def trans(gps, arg):
             return str
         return -1
 
-    s_lora = serial.Serial(arg, 19200)
     try:
         while True:
             if float('{:.16f}'.format(gps.latitude[0]))>0: # ちゃんとしたデーターがある程度たまったら出力する
@@ -76,7 +75,6 @@ def trans(gps, arg):
                 jikan = h + minutes + second
                 s_lora.write(b'TXDA'+ jikan.encode('utf-8') + \
                     lat.encode('utf-8') + lon.encode('utf-8')  + b'\r\n')
-                s_lora.flush()
 
     except KeyboardInterrupt:
         print('finish')

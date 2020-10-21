@@ -14,8 +14,7 @@ micropyGPSを用いたGPS信号受信プロセス
 デーモンスレッドにより, GPSデータを中断することなく別スレッドで持続して取得
 '''
 
-def rungps(gps, lock, arg): # GPSモジュールを読み、GPSオブジェクトを更新する
-    s_GPS = serial.Serial(arg, 9600, timeout=10)
+def rungps(s_GPS, s_tx, gps, lock): # GPSモジュールを読み、GPSオブジェクトを更新する
     s_GPS.readline()  # 最初の1行は中途半端なデータが読めることがあるので、捨てる
     sentence = []
     while True:
@@ -34,6 +33,8 @@ def rungps(gps, lock, arg): # GPSモジュールを読み、GPSオブジェク�
             for x in sentence: # 読んだ文字列を解析してGPSオブジェクトにデーターを追加、更新する
                 gps.update(x)
             lock.release()
+
+            s_tx.flush()
 
             time.sleep(1.0)
 
