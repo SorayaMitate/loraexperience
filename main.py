@@ -15,7 +15,7 @@ if __name__ == "__main__":
 
     gps = micropyGPS.MicropyGPS(9, 'dd') # MicroGPSオブジェクトを生成する。
                                         # 引数はタイムゾーンの時差と出力フォーマット
-    s_gps = serial.Serial(gps, 9600, timeout=10)
+    s_gps = serial.Serial(ttyUSB0, 9600, timeout=10)
     s_tx = serial.Serial(ttyUSB1, 19200)
     s_rx = serial.Serial(ttyUSB2, 19200)
 
