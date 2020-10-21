@@ -67,6 +67,8 @@ def trans(gps, arg):
                 jikan = h + minutes + second
                 s_lora.write(b'TXDA'+ jikan.encode('utf-8') + \
                     lat.encode('utf-8') + lon.encode('utf-8')  + b'\r\n')
+                print(b'TXDA'+ jikan.encode('utf-8') + \
+                    lat.encode('utf-8') + lon.encode('utf-8')  + b'\r\n')
 
     except KeyboardInterrupt:
         print('finish')
