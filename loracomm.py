@@ -16,7 +16,6 @@ def rec(s_lora, gps):
     logging.debug('rec start')
 
     file_name = 'data.csv'
-    s_lora = serial.Serial(arg, 19200)
 
     try:
         while True:
