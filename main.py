@@ -24,5 +24,5 @@ if __name__ == "__main__":
     tx_thread = threading.Thread(target=trans, args=(gps, ttyUSB1))
     tx_thread.start()
 
-    rx_thread = threading.Thread(target=trans, args=(gps, ttyUSB2))
+    rx_thread = threading.Thread(target=rec, args=(gps, ttyUSB2))
     rx_thread.start()
