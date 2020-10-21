@@ -63,6 +63,7 @@ def trans(gps, arg):
     s_lora = serial.Serial(arg, 19200)
     try:
         while True:
+            print('lat=','{:.16f}'.format(gps.latitude[0]))
             if gps.clean_sentences > 20: # ちゃんとしたデーターがある程度たまったら出力する
                 h = gps.timestamp[0] if gps.timestamp[0] < 24 else gps.timestamp[0] - 24
                 lat = '{:.16f}'.format(gps.latitude[0])
