@@ -28,11 +28,11 @@ def rec(s_lora, gps):
             if len(rxda_split) >= 3:
                 if gps.clean_sentences > 20: # ちゃんとしたデーターがある程度たまったら出力する
                     h = gps.timestamp[0] if gps.timestamp[0] < 24 else gps.timestamp[0] - 24
-                    lat = '{:.16f}'.format(gps.latitude[0])
-                    lon = '{:.16f}'.format(gps.longitude[0])
+                    lat = float('{:.16f}'.format(gps.latitude[0]))
+                    lon = float('{:.16f}'.format(gps.longitude[0]))
                     lon = '0' + lon
                     with open(file_name, 'a') as f:
-                        f.write(rxda + ',' + lat.encode('utf-8') + ',' + lon.encode('utf-8') + ',' + '\n')
+                        f.write(rxda + ',' + str(lat) + ',' + str(lon) + ',' + '\n')
                         f.close()
             else :
                 continue
