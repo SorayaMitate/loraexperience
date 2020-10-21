@@ -5,10 +5,15 @@ import time
 import micropyGPS
 import serial
 import sys
+import logging
 #sys.path.append(
 #    r'C:\Users\soraya-PC\OneDrive - awcc.uec.ac.jp\uec_doc\Mieuniv_Scope\experiment\lib')
 
+logging.basicConfig(level=logging.DEBUG, format='%(threadName)s: %(message)s')
+
 def rec(gps, arg):
+
+    logging.debug('rec start')
 
     file_name = 'data.csv'
     s_lora = serial.Serial(arg, 19200)
@@ -37,7 +42,11 @@ def rec(gps, arg):
         s_lora.close()
         print('finish')
 
+    logging.debug('end')
+
 def trans(gps, arg):
+
+    logging.debug('trans start')
 
     '''
     LoRaを用いた通信
